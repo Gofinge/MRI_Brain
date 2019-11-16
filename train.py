@@ -1,10 +1,9 @@
 import importlib
-
 import torch
 import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-
 from datasets.dataLoader import get_train_loaders
+
 
 def _create_trainer(config, model, optimizer, lr_scheduler, loss_criterion, eval_criterion, loaders, logger):
     assert 'trainer' in config, 'Could not find trainer configuration'
