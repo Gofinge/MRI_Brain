@@ -129,7 +129,7 @@ class HDF5Dataset(Dataset):
         :param slice_builder_cls: defines how to sample the patches from the volume
         """
         assert phase in ['train', 'val', 'test']
-        self._check_patch_shape(patch_shape)
+        # self._check_patch_shape(patch_shape)
         self.phase = phase
         self.file_path = file_path
 
@@ -325,6 +325,7 @@ def get_train_loaders(config):
             logger.info(f'Skipping validation set: {val_path}', exc_info=True)
 
     num_workers = loaders_config.get('num_workers', 1)
+    batch_size = loaders_config.get('batch_size', 1)
     logger.info(f'Number of workers for train/val datasets: {num_workers}')
     # when training with volumetric data use batch_size of 1 due to GPU memory constraints
     return {
