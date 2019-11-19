@@ -78,7 +78,7 @@ loaders:
   # how many subprocesses to use for data loading
   num_workers: 4
   # batch size of DataLoader
-   batch_size: 1
+  batch_size: 1
   # data transformations/augmentations
   transformer:
     train:
