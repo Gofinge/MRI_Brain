@@ -7,7 +7,7 @@ model:
   # number of input channels to the model
   in_channels: 1
   # number of output channels
-  out_channels: 1
+  out_channels: 2
   # determines the order of operators in a single layer (crg - Conv3d+ReLU+GroupNorm)
   layer_order: crg
   # feature maps scale factor
@@ -57,24 +57,14 @@ lr_scheduler:
   gamma: 0.2
 # data loaders configuration
 loaders:
-  # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
-  train_patch: [32, 64, 64]
-  # train stride between patches
-  train_stride: [8, 16, 16]
-  # validation patch (can be bigger than train patch since there is no backprop)
-  val_patch: [32, 64, 64]
-  # validation stride (validation patches doesn't need to overlap)
-  val_stride: [32, 64, 64]
-  # path to the raw data within the H5
-  raw_internal_path: raw
-  # path to the the label data withtin the H5
-  label_internal_path: label
   # paths to the training datasets
-  train_path:
-    - '/Users/gofinge/Documents/Data/BrainMRI/train/train_pre_data.h5'
+  train_path: '/Users/gofinge/Documents/Data/BrainMRI/train'
   # paths to the validation datasets
-  val_path:
-    - '/Users/gofinge/Documents/Data/BrainMRI/train/train_pre_data.h5'
+  val_path: '/Users/gofinge/Documents/Data/BrainMRI/val'
+  # path to the raw data within the H5
+  raw_internal_path: 'mri.h5'
+  # path to the the label data withtin the H5
+  label_internal_path: 'label.csv'
   # how many subprocesses to use for data loading
   num_workers: 4
   # batch size of DataLoader

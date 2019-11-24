@@ -3,6 +3,9 @@ import torch
 import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from datasets.dataLoader import get_train_loaders
+from util.utils import get_logger
+from util.config import load_config
+from unet3d.model import get_model
 
 
 def _create_trainer(config, model, optimizer, lr_scheduler, loss_criterion, eval_criterion, loaders, logger):

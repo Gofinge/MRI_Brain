@@ -21,19 +21,21 @@ model:
   num_groups: 8
   # apply element-wise nn.Sigmoid after the final 1x1 convolution, otherwise apply nn.Softmax
   final_sigmoid: true
-# specify the test datasets
-datasets:
+# data loaders configuration
+loaders:
+  # paths to the datasets
+  test_path: '/Users/gofinge/Documents/Data/BrainMRI/test'
   # patch size given to the network (adapt to fit in your GPU mem)
   patch: [64, 128, 128]
   # stride between patches (make sure the the patches overlap in order to get smoother prediction maps)
   stride: [32, 100, 100]
   # path to the raw data within the H5
-  raw_internal_path: raw
+  raw_internal_path: 'mri.h5'
   # how many subprocesses to use for data loading
-  num_workers: 8
-  # paths to the datasets
-  test_path:
-    - 'resources/random_label3D.h5'
+  num_workers: 4
+  # batch size of DataLoader
+  batch_size: 1
+  # data transformations/augmentations
   transformer:
     test:
       raw:
