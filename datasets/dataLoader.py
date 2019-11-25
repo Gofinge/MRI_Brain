@@ -4,7 +4,7 @@ import h5py
 import numpy as np
 import torch
 import datasets.transforms as transforms
-from torch.utils.data import Dataset, DataLoader, ConcatDataset
+from torch.utils.data import Dataset, DataLoader
 from util.utils import get_logger
 
 

@@ -3,9 +3,10 @@ import torch
 import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from datasets.dataLoader import get_train_loaders
-from util.utils import get_logger
+from util.utils import get_logger, get_number_of_learnable_parameters
 from util.config import load_config
 from unet3d.model import get_model
+from unet3d.trainer import UNet3DTrainer
 
 
 def _create_trainer(config, model, optimizer, lr_scheduler, loss_criterion, eval_criterion, loaders, logger):
@@ -86,14 +87,14 @@ def main():
     model = get_model(config)
     # put the model on GPUs
     logger.info(f"Sending the model to '{config['device']}'")
-    model = model.to(config['device'])
-    # Log the number of learnable parameters
+    #     model = model.to(config['device'])
+    #     # Log the number of learnable parameters
     logger.info(f'Number of learnable params {get_number_of_learnable_parameters(model)}')
 
     # Create loss criterion
-    loss_criterion = get_loss_criterion(config)
+    loss_criterion = torch.nn.BCELoss(reduction='mean')
     # Create evaluation metric
-    eval_criterion = get_evaluation_metric(config)
+    eval_criterion = loss_criterion
 
     # Create data loaders
     loaders = get_train_loaders(config)

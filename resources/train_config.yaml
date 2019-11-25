@@ -1,5 +1,7 @@
 # use a fixed random seed to guarantee that when you run the code twice you will get the same outcome
 manual_seed: 0
+# ID of GPU which used to train the model
+device: 'cuda:0'
 # model configuration
 model:
   # model class

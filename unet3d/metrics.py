@@ -5,7 +5,7 @@ import torch
 import torch.nn.functional as F
 from skimage import measure
 
-from unet3d.losses import compute_per_channel_dice, expand_as_one_hot
+from util.losses import compute_per_channel_dice, expand_as_one_hot
 from unet3d.utils import get_logger, adapted_rand
 
 LOGGER = get_logger('EvalMetric')

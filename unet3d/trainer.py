@@ -5,8 +5,9 @@ import numpy as np
 import torch
 from tensorboardX import SummaryWriter
 from torch.optim.lr_scheduler import ReduceLROnPlateau
+from tqdm import tqdm
 
-from . import utils
+from util import utils
 
 
 class UNet3DTrainer:
@@ -122,7 +123,7 @@ class UNet3DTrainer:
                    num_iterations=num_iterations,
                    num_epoch=num_epoch,
                    max_num_epochs=max_num_epochs,
-                   max_num_iterations=max_num_iterations,
+                   max_num_iterations=int(max_num_iterations),
                    validate_after_iters=validate_after_iters,
                    log_after_iters=log_after_iters,
                    validate_iters=validate_iters,
@@ -152,8 +153,9 @@ class UNet3DTrainer:
 
         # sets the model in training mode
         self.model.train()
-
-        for i, t in enumerate(train_loader):
+        total_batch = train_loader.__len__()
+        bar = tqdm(enumerate(train_loader), total=total_batch)
+        for i, t in bar:
             self.logger.info(
                 f'Training iteration {self.num_iterations}. Batch {i}. Epoch [{self.num_epoch}/{self.max_num_epochs - 1}]')
 
