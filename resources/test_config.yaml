@@ -6,7 +6,7 @@ store_predictions_in_memory: True
 # model configuration
 model:
   # model class
-  name: UNet3D
+  name: ResidualUNet3D
   # number of input channels to the model
   in_channels: 1
   # number of output channels
