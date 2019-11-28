@@ -371,7 +371,6 @@ class TagsUNet3D(nn.Module):
         return [tag / torch.norm(tag, p=2, dim=1).detach().clamp(min=1e-8) for tag in tags]
 
 
-################################################Distance transform 3DUNet##############################################
 class DistanceTransformUNet3D(nn.Module):
     """
     Predict Distance Transform to the boundary signal based on the output from the Tags3DUnet. Fore training use either:

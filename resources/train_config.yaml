@@ -60,13 +60,13 @@ lr_scheduler:
 # data loaders configuration
 loaders:
   # paths to the training datasets
-  train_path: '/Users/gofinge/Documents/Data/BrainMRI/train'
+  train_path: '/home/wuxiaoyang/dazuoye/data/train'
   # paths to the validation datasets
-  val_path: '/Users/gofinge/Documents/Data/BrainMRI/val'
+  val_path: '/home/wuxiaoyang/dazuoye/data/val'
   # path to the raw data within the H5
   raw_internal_path: 'mri.h5'
   # path to the the label data withtin the H5
-  label_internal_path: 'label.csv'
+  label_internal_path: 'labels.csv'
   # how many subprocesses to use for data loading
   num_workers: 4
   # batch size of DataLoader

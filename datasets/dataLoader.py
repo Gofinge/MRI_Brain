@@ -33,11 +33,11 @@ class HDF5Dataset(Dataset):
 
         # convert raw_internal_path, label_internal_path and weight_internal_path to list for ease of computation
         if isinstance(raw_internal_path, str):
-            raw_internal_path = [raw_internal_path]
+            raw_internal_path = raw_internal_path
         if isinstance(label_internal_path, str):
-            label_internal_path = [label_internal_path]
+            label_internal_path = label_internal_path
         if isinstance(weight_internal_path, str):
-            weight_internal_path = [weight_internal_path]
+            weight_internal_path = weight_internal_path
 
         with h5py.File(os.path.join(self.file_path, raw_internal_path), 'r') as input_file:
             # WARN: we load everything into memory due to hdf5 bug when reading H5 from multiple subprocesses, i.e.
@@ -71,7 +71,7 @@ class HDF5Dataset(Dataset):
             raise StopIteration
 
         # get the raw data patch for a given slice
-        raw_transformed = self._transform(self.raws, idx, self.raw_transform)
+        raw_transformed = torch.unsqueeze(self._transform(self.raws, idx, self.raw_transform), 0)
 
         if self.phase == 'test':
             # just return the transformed raw patch and the metadata
@@ -125,8 +125,8 @@ def get_train_loaders(config):
     # get train and validation files
     train_path = loaders_config['train_path']
     val_path = loaders_config['val_path']
-    assert isinstance(train_path, list)
-    assert isinstance(val_path, list)
+    assert isinstance(train_path, str)
+    assert isinstance(val_path, str)
     # get h5 internal paths for raw and label
     raw_internal_path = loaders_config['raw_internal_path']
     label_internal_path = loaders_config['label_internal_path']
@@ -173,7 +173,7 @@ def get_test_loaders(config):
 
     # get train and validation files
     test_path = loaders_config['test_path']
-    assert isinstance(test_path, list)
+    assert isinstance(test_path, str)
     # get h5 internal path
     raw_internal_path = loaders_config['raw_internal_path']
     # get train/validation patch size and stride
